@@ -149,7 +149,7 @@ bool ethash_cl_miner::init(ethash_params const& params, ethash_h256_t const *see
 
 		// if this throws then it's because we probably need to subdivide the dag uploads for compatibility
 		void* dag_ptr = m_queue.enqueueMapBuffer(m_dag, true, m_opencl_1_1 ? CL_MAP_WRITE : CL_MAP_WRITE_INVALIDATE_REGION, 0, params.full_size);
-		ethash_compute_full_data(dag_ptr, &params, &cache);
+		ethash_compute_full_data(dag_ptr, params.full_size, &cache);
 		m_queue.enqueueUnmapMemObject(m_dag, dag_ptr);
 
 		free(cache_mem);
